@@ -715,7 +715,7 @@ const Expenses = () => {
 
       {/* CARDS */}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
 
         {filteredExpenses.map(
           (item) => (
@@ -770,9 +770,9 @@ const Expenses = () => {
 
         </h2>
 
-        <div className="overflow-x-auto">
+        <div className="w-full overflow-hidden">
 
-          <table className="w-full">
+  <table className="w-full text-sm md:text-base table-fixed">
 
             <thead>
 
@@ -814,11 +814,11 @@ const Expenses = () => {
                     className="border-b border-gray-800"
                   >
 
-                    <td className="py-6">
+                    <td className="py-4 break-words">
                       {item.title}
                     </td>
 
-                    <td className="py-6">
+                    <td className="py-4 break-words">
                       {item.category}
                     </td>
 
@@ -830,11 +830,12 @@ const Expenses = () => {
                       )}
                     </td>
 
-                    <td className="py-6">
+                    <td className="py-4 break-words">
                       {item.date}
                     </td>
 
-                    <td className="py-6 flex gap-3">
+                    <td className="py-4">
+  <div className="flex flex-wrap gap-2"></div>
 
                       <button
                         onClick={() =>
