@@ -579,7 +579,7 @@ const Expenses = () => {
 
   return (
 
-    <div className="min-h-screen bg-[#020617] text-white p-4 md:p-6">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#020617] text-white p-4 md:p-6">
 
       {/* HEADER */}
 
@@ -772,7 +772,7 @@ const Expenses = () => {
 
         <div className="overflow-x-auto">
 
-          <table className="w-full min-w-[600px] md:min-w-[700px]">
+          <table className="w-full">
 
             <thead>
 
