@@ -1,0 +1,431 @@
+import jsPDF from "jspdf";
+
+import autoTable from "jspdf-autotable";
+
+export const exportFinancialReport = (
+
+  incomeData = [],
+
+  expenseData = [],
+
+  budgetData = []
+
+) => {
+
+  /* ================= TOTALS ================= */
+
+  const totalIncome =
+    incomeData.reduce(
+
+      (acc, item) =>
+
+        acc +
+        Number(
+          item.amount || 0
+        ),
+
+      0
+
+    );
+
+  const totalExpense =
+    expenseData.reduce(
+
+      (acc, item) =>
+
+        acc +
+        Number(
+          item.amount || 0
+        ),
+
+      0
+
+    );
+
+  const totalBudget =
+    budgetData.reduce(
+
+      (acc, item) =>
+
+        acc +
+        Number(
+          item.budget || 0
+        ),
+
+      0
+
+    );
+
+  const savings =
+    totalIncome -
+    totalExpense;
+
+  /* ================= PDF ================= */
+
+  const doc =
+    new jsPDF();
+
+  /* ================= TITLE ================= */
+
+  doc.setFontSize(30);
+
+  doc.setTextColor(
+    20,
+    20,
+    20
+  );
+
+  doc.text(
+    "FinPilot Financial Report",
+    20,
+    25
+  );
+
+  /* ================= DATE ================= */
+
+  doc.setFontSize(12);
+
+  doc.setTextColor(
+    80,
+    80,
+    80
+  );
+
+  doc.text(
+
+    `Generated on: ${new Date().toLocaleString(
+      "en-IN"
+    )}`,
+
+    20,
+    35
+
+  );
+
+  /* ================= SUMMARY ================= */
+
+  doc.setFontSize(22);
+
+  doc.setTextColor(
+    30,
+    30,
+    30
+  );
+
+  doc.text(
+    "Financial Summary",
+    20,
+    55
+  );
+
+  doc.setFontSize(14);
+
+  doc.setTextColor(
+    60,
+    60,
+    60
+  );
+
+  doc.text(
+
+    `Total Income: Rs. ${Number(
+      totalIncome
+    ).toLocaleString(
+      "en-IN"
+    )}`,
+
+    20,
+    70
+
+  );
+
+  doc.text(
+
+    `Total Expenses: Rs. ${Number(
+      totalExpense
+    ).toLocaleString(
+      "en-IN"
+    )}`,
+
+    20,
+    80
+
+  );
+
+  doc.text(
+
+    `Total Savings: Rs. ${Number(
+      savings
+    ).toLocaleString(
+      "en-IN"
+    )}`,
+
+    20,
+    90
+
+  );
+
+  doc.text(
+
+    `Total Budget: Rs. ${Number(
+      totalBudget
+    ).toLocaleString(
+      "en-IN"
+    )}`,
+
+    20,
+    100
+
+  );
+
+  /* ================= INCOME TABLE ================= */
+
+  autoTable(doc, {
+
+    startY: 115,
+
+    head: [
+
+      [
+
+        "Income Title",
+
+        "Category",
+
+        "Amount",
+
+        "Date",
+
+      ],
+
+    ],
+
+    body:
+
+      incomeData.length > 0
+
+        ? incomeData.map(
+            (item) => [
+
+              item.title || "-",
+
+              item.category || "-",
+
+              `Rs. ${Number(
+                item.amount || 0
+              ).toLocaleString(
+                "en-IN"
+              )}`,
+
+              item.date || "-",
+
+            ]
+          )
+
+        : [
+
+            [
+
+              "No Income Data",
+
+              "-",
+
+              "-",
+
+              "-",
+
+            ],
+
+          ],
+
+    theme: "grid",
+
+    headStyles: {
+
+      fillColor: [
+
+        59,
+        130,
+        246,
+
+      ],
+
+    },
+
+  });
+
+  /* ================= EXPENSE TABLE ================= */
+
+  autoTable(doc, {
+
+    startY:
+      doc.lastAutoTable
+        .finalY + 15,
+
+    head: [
+
+      [
+
+        "Expense Title",
+
+        "Category",
+
+        "Amount",
+
+        "Date",
+
+      ],
+
+    ],
+
+    body:
+
+      expenseData.length > 0
+
+        ? expenseData.map(
+            (item) => [
+
+              item.title || "-",
+
+              item.category || "-",
+
+              `Rs. ${Number(
+                item.amount || 0
+              ).toLocaleString(
+                "en-IN"
+              )}`,
+
+              item.date || "-",
+
+            ]
+          )
+
+        : [
+
+            [
+
+              "No Expense Data",
+
+              "-",
+
+              "-",
+
+              "-",
+
+            ],
+
+          ],
+
+    theme: "grid",
+
+    headStyles: {
+
+      fillColor: [
+
+        239,
+        68,
+        68,
+
+      ],
+
+    },
+
+  });
+
+  /* ================= BUDGET TABLE ================= */
+
+  autoTable(doc, {
+
+    startY:
+      doc.lastAutoTable
+        .finalY + 15,
+
+    head: [
+
+      [
+
+        "Budget Category",
+
+        "Budget Amount",
+
+      ],
+
+    ],
+
+    body:
+
+      budgetData.length > 0
+
+        ? budgetData.map(
+            (item) => [
+
+              item.category || "-",
+
+              `Rs. ${Number(
+                item.budget || 0
+              ).toLocaleString(
+                "en-IN"
+              )}`,
+
+            ]
+          )
+
+        : [
+
+            [
+
+              "No Budget Data",
+
+              "-",
+
+            ],
+
+          ],
+
+    theme: "grid",
+
+    headStyles: {
+
+      fillColor: [
+
+        245,
+        158,
+        11,
+
+      ],
+
+    },
+
+  });
+
+  /* ================= FOOTER ================= */
+
+  const pageHeight =
+    doc.internal
+      .pageSize.height;
+
+  doc.setFontSize(10);
+
+  doc.setTextColor(
+    120,
+    120,
+    120
+  );
+
+  doc.text(
+
+    "Generated by FinPilot Personal Finance System",
+
+    20,
+
+    pageHeight - 10
+
+  );
+
+  /* ================= SAVE ================= */
+
+  doc.save(
+    "FinPilot_Report.pdf"
+  );
+
+};
