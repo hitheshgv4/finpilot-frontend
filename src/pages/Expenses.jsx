@@ -605,7 +605,7 @@ const Expenses = () => {
           onClick={
             openAddModal
           }
-          className="bg-red-500 hover:bg-red-600 px-6 py-4 rounded-2xl text-lg md:text-xl font-bold"
+          className="w-full md:w-auto bg-red-500 hover:bg-red-600 px-6 py-4 rounded-2xl text-lg md:text-xl font-bold"
         >
 
           + Add Expense
@@ -659,7 +659,7 @@ const Expenses = () => {
               e.target.value
             )
           }
-          className="bg-[#111827] border border-gray-700 rounded-2xl px-5 py-4 text-white outline-none focus:border-red-500"
+          className="w-full lg:w-auto bg-[#111827] border border-gray-700 rounded-2xl px-5 py-4 text-white outline-none focus:border-red-500"
         >
 
           {categories.map(
@@ -686,7 +686,7 @@ const Expenses = () => {
               e.target.value
             )
           }
-          className="bg-[#111827] border border-gray-700 rounded-2xl px-5 py-4 text-white outline-none focus:border-red-500"
+          className="w-full lg:w-auto bg-[#111827] border border-gray-700 rounded-2xl px-5 py-4 text-white outline-none focus:border-red-500"
         >
 
           <option value="latest">
@@ -731,7 +731,7 @@ const Expenses = () => {
 
               </h2>
 
-              <h1 className="text-3xl md:text-5xl font-bold text-red-400 mb-4 break-all">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-red-400 mb-4 break-words" >
 
                 ₹ {Number(
                   item.amount
@@ -772,7 +772,7 @@ const Expenses = () => {
 
         <div className="overflow-x-auto">
 
-          <table className="w-full min-w-[700px]">
+          <table className="w-full min-w-[600px] md:min-w-[700px]">
 
             <thead>
 
