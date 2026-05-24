@@ -136,22 +136,22 @@ const Login = () => {
         const user = {
 
   id:
-    response.data.id,
+    response.data.user.id,
 
   name:
-    response.data.name,
+    response.data.user.name,
 
   email:
-    response.data.email,
+    response.data.user.email,
 
   phone:
-    response.data.phone,
+    response.data.user.phone,
 
   location:
-    response.data.location,
+    response.data.user.location,
 
   profession:
-    response.data.profession,
+    response.data.user.profession,
 
 };
 
