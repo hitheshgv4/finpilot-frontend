@@ -2,19 +2,18 @@ import axios from "axios";
 
 /* ================= BASE URL ================= */
 
+import axios from "axios";
+
+/* ================= BASE URL ================= */
+// 1. Check if VITE_API_URL exists in the environment
+// 2. If it doesn't, default to your live production Railway URL
+const baseBackendURL = import.meta.env.VITE_API_URL || "https://finpilot-backend-production-d06b.up.railway.app";
+
 const API = axios.create({
-
-  baseURL:
-  `${import.meta.env.VITE_API_URL}/api`,
-   
-
+  baseURL: `${baseBackendURL}/api`,
   headers: {
-
-    "Content-Type":
-      "application/json",
-
+    "Content-Type": "application/json",
   },
-
 });
 
 /* ================= REQUEST INTERCEPTOR ================= */
